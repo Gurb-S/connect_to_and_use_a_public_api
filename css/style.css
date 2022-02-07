@@ -1,0 +1,43 @@
+/* Global Layout Set-up */
+* { 
+    box-sizing: border-box;
+}
+    
+body{
+    margin: 5px;
+    padding: 0;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    color: #222;
+    background: #ECECEC;
+}   
+
+#directory {
+    display: flex;
+}
+.profile {
+    border: solid 2px orange;
+    height: 150px;
+    width: 400px;
+    display: flex;
+    align-items: center;
+    background-color: #F4F4F4;
+}
+
+.user_img {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+}
+
+.user_info {
+    line-height: 175%;
+}
+
+.name, .email, .address{
+    display: inline-block;
+    margin: 0 2px 0 2px;
+}
+p {
+    font-weight: 300;
+}
