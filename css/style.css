@@ -58,3 +58,39 @@ h2{
 p {
     font-weight: 300;
 }
+
+
+/**************************/
+/****** Model Window*******/
+/**************************/
+
+#model {
+    background-color: white;
+    border-radius: 5px;
+    width: 350px;
+    height: 430px;
+}
+
+.x_btn {
+    width: 35px;
+    height: auto;
+    float: right;
+    margin: 5px 3px 0 0;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.model_img {
+    border-radius: 50%;
+    margin-left: 50px;
+    margin-top: 10px;
+}
+
+
+.city {
+    border-bottom: 1px solid gray;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
