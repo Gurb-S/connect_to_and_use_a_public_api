@@ -10,33 +10,49 @@ body{
     font-family: 'Roboto', sans-serif;
     color: #222;
     background: #ECECEC;
+    overflow-x: hidden;
 }   
+
+h2{
+    text-align: left; 
+}
 
 #directory {
     display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-content: space-between;
 }
 .profile {
     border: solid 2px orange;
-    height: 150px;
+    height: 130px;
     width: 400px;
     display: flex;
     align-items: center;
     background-color: #F4F4F4;
+    margin: 5px;
+    margin-bottom: 25px;
 }
 
 .user_img {
     border-radius: 50%;
     height: 100px;
     width: 100px;
+    margin: 8px;
 }
 
 .user_info {
-    line-height: 175%;
+    line-height: 180%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    text-align: left;
 }
 
 .name, .email, .address{
     display: inline-block;
     margin: 0 2px 0 2px;
+    /* font-size: .8rem; */
 }
 p {
     font-weight: 300;
