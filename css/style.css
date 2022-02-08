@@ -64,18 +64,26 @@ p {
 /****** Model Window*******/
 /**************************/
 
+aside {
+    display: flex;
+    justify-content: center;
+    /* display: none; */
+    background: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.3));
+}
+
 #model {
-    background-color: white;
+    background-color: #F8F8F8;
     border-radius: 5px;
     width: 350px;
     height: 430px;
 }
 
-.x_btn {
+#x_btn {
     width: 35px;
     height: auto;
     float: right;
     margin: 5px 3px 0 0;
+    cursor: pointer;
 }
 
 .clearfix {

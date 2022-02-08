@@ -42,7 +42,6 @@ function displayProfiles(data){
         </div>    
         </div>`;
     })
-    
 }
 /**
  * calls the `getProfiles` function and returns a promise that holds an array of objects
@@ -53,6 +52,7 @@ function displayProfiles(data){
 //     .then(displayProfiles);
 
 
-// function getModel(e) {
-    
-// }
+function getModel(e) {
+    directory.style.backgroundColor = '#464646';
+}
+
