@@ -29,6 +29,7 @@ async function getProfiles(){
  * `displayProfiles` function that takes the data from an array of objects and 
  *  uses that data to create and display and simple directory with those users
  * @param {array} data - an array of object with info about users
+ * @returns - returns the array of objects that was passed into it as an arguement
  */
 function displayProfiles(data){
     console.log(data);
@@ -51,12 +52,17 @@ function displayProfiles(data){
  */
 getProfiles()
     .then(displayProfiles)
-    .then(eventLister);
+    .then(eventListener);
 
 
 
-
-function eventLister(data){
+/**
+ *`eventListner` function that takes in an array of objects and adds an eventlistener for every
+ *  user profile displayed 
+ * When that user profile is clicked on it passes the user's array of data to the `getModel` function
+ * @param {array} data - an array of object with info about users
+ */
+function eventListener(data){
     console.log(data[0]);
     const profiles = document.getElementsByClassName('profile');
     for(let i=0; i < profiles.length;i++){
@@ -75,6 +81,12 @@ function eventLister(data){
     }
 }
 
+
+/**
+ *`getModel` function that takes an array of objects and creates a popup model
+ *  window for the user that was clicked on with various infomation about that user
+ * @param {array} i - an array of objects with info about a specificed user
+ */
 function getModel(i) {
     model.innerHTML = `<div id="model">
         <img src="${i.picture.large}" class="model_img" alt="user1">
@@ -98,6 +110,11 @@ function getModel(i) {
     })
 }
 
+/**
+ * `dobFormat` function that takes in a string and converts it to the MM/DD/YYYY format
+ * @param {string} string - takes in a string that holds a date of birth in a specific format
+ * @returns - a string with the dob formatted as MM/DD/YYYY
+ */
 function dobFormat (string) {
     const bdaySplit = string.split('T')[0].split('-');
     const dobString = [bdaySplit[1],bdaySplit[2],bdaySplit[0]];
