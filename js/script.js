@@ -10,8 +10,6 @@ v2 - ???
 
 const directory = document.getElementById('directory');
 const model = document.getElementById('model-window');
-const x_btn = document.getElementById('x_btn');
-
 
 /**
  * `getProfiles` function
@@ -53,8 +51,7 @@ function displayProfiles(data){
  */
 getProfiles()
     .then(displayProfiles)
-    .then(eventLister)
-    .then(closeModel);
+    .then(eventLister);
 
 
 
@@ -66,8 +63,11 @@ function eventLister(data){
         const input = profiles[i]
         input.addEventListener('click',(e) =>{
             const target = e.target.parentElement.parentElement;
+            const imgParent = e.target.parentElement;
+            const profileDiv = e.target;
+            console.log(target);
             for(let i = 0; i < profiles.length; i++){
-                if(profiles[i] === target){
+                if(profiles[i] === target || profiles[i] === imgParent || profiles[i] === profileDiv){
                     getModel(data[i]);
                 }
             }
@@ -76,8 +76,7 @@ function eventLister(data){
 }
 
 function getModel(i) {
-    console.log(i);
-    model.innerHTML += `<div id="model">
+    model.innerHTML = `<div id="model">
         <img src="${i.picture.large}" class="model_img" alt="user1">
         <img src="/imgs/x_btn.jpg" id="x_btn" alt="close_btn">
         <div class="contact">
@@ -88,15 +87,19 @@ function getModel(i) {
         <div class="other">
             <p>${i.phone}</p>
             <p>${i.location.street.number} ${i.location.street.name}</p>
-            <p>Birthday<strong>:</strong> ${i.dob.date}</p>
+            <p>Birthday<strong>:</strong> ${dobFormat(i.dob.date)}</p>
         </div>
     </div>`
     console.log(model);
     model.className = 'model-on';
+    const x_btn = document.getElementById('x_btn');
+    x_btn.addEventListener('click',() =>{
+        model.className = 'model-off';
+    })
 }
 
-function closeModel (){
-    x_btn.addEventListener('click',() =>{
-        model.classList.add('model-off');
-    })
+function dobFormat (string) {
+    const bdaySplit = string.split('T')[0].split('-');
+    const dobString = [bdaySplit[1],bdaySplit[2],bdaySplit[0]];
+    return dobString.join('/');
 }
