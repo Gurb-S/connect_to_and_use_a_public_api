@@ -63,18 +63,19 @@ getProfiles()
  * @param {array} data - an array of object with info about users
  */
 function eventListener(data){
-    console.log(data[0]);
+    console.log(data);
     const profiles = document.getElementsByClassName('profile');
     for(let i=0; i < profiles.length;i++){
         const input = profiles[i]
         input.addEventListener('click',(e) =>{
+            //modelWindowPopUp(e,profiles,data);
             const target = e.target.parentElement.parentElement;
             const imgParent = e.target.parentElement;
             const profileDiv = e.target;
             console.log(target);
             for(let i = 0; i < profiles.length; i++){
                 if(profiles[i] === target || profiles[i] === imgParent || profiles[i] === profileDiv){
-                    getModel(data[i]);
+                    getModel(data[i],data);
                 }
             }
         })
@@ -87,7 +88,8 @@ function eventListener(data){
  *  window for the user that was clicked on with various infomation about that user
  * @param {array} i - an array of objects with info about a specificed user
  */
-function getModel(i) {
+function getModel(i,data) {
+    console.log(data);
     model.innerHTML = `
     <img src="/imgs/left_arrow.png" id="left_arrow" class="both_arrow" alt="left arrow">
     <div id="model">
@@ -107,9 +109,46 @@ function getModel(i) {
     <img src="/imgs/right_arrow.png" id="right_arrow" class="both_arrow" alt="right arrow">`
     console.log(model);
     model.className = 'model-on';
+    // const x_btn = document.getElementById('x_btn');
+    // x_btn.addEventListener('click',() =>{
+    //     model.className = 'model-off';
+    // })
+    // const left_arrow = document.getElementById('left_arrow');
+    // const right_arrow = document.getElementById('right_arrow');
+    // left_arrow.addEventListener('click',(e) =>{
+    //     console.log(e.target.parentElement);
+    // })
+    // right_arrow.addEventListener('click',(e) =>{
+    //     console.log(e.target.parentElement);
+    // })
+    clickableBtns(data);
+}
+
+function clickableBtns (data){
+    console.log(data);
     const x_btn = document.getElementById('x_btn');
     x_btn.addEventListener('click',() =>{
         model.className = 'model-off';
+    })
+    const left_arrow = document.getElementById('left_arrow');
+    const right_arrow = document.getElementById('right_arrow');
+    left_arrow.addEventListener('click',(e) =>{
+        // const target = e.target.parentElement.previousElementSibling.children;
+        // console.log(target);
+        const arrowModel = e.target.nextElementSibling;
+        // console.log(arrowModel);
+        const profiles = document.getElementsByClassName('profile');
+        for(let i = 0; i < profiles.length; i++){
+            const profileName = profiles[i].children[1].children[0].textContent;
+            // console.log(profileName);
+            if(profileName === arrowModel.children[2].children[0].textContent){
+                console.log(profileName);
+                console.log(data[i-1]);
+            }
+        }
+    })
+    right_arrow.addEventListener('click',(e) =>{
+        console.log(e.target.parentElement.previousElementSibling.children);
     })
 }
 
@@ -123,3 +162,15 @@ function dobFormat (string) {
     const dobString = [bdaySplit[1],bdaySplit[2],bdaySplit[0]];
     return dobString.join('/');
 }
+
+// function modelWindowPopUp (e,profiles,data){
+//     const target = e.target.parentElement.parentElement;
+//     const imgParent = e.target.parentElement;
+//     const profileDiv = e.target;
+//     console.log(target);
+//     for(let i = 0; i < profiles.length; i++){
+//         if(profiles[i] === target || profiles[i] === imgParent || profiles[i] === profileDiv){
+//             getModel(data[i]);
+//         }
+//     }
+// }
