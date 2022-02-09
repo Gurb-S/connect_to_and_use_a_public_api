@@ -73,15 +73,18 @@ p {
     height: 100vh;
     top: 0;
     left: 0;
-    background-color: rgba(0,0,0,0.5);
-    visibility: hidden;
-    opacity: 0;
     transition: visibility 0s, opacity 0.5s;
 }
 
 .model-on {
     visibility: visible;
     opacity: 1;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.model-off{
+    visibility: hidden;
+    opacity: 0;
 }
 
 #model {

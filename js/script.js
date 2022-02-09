@@ -10,6 +10,7 @@ v2 - ???
 
 const directory = document.getElementById('directory');
 const model = document.getElementById('model-window');
+const x_btn = document.getElementById('x_btn');
 
 
 /**
@@ -52,39 +53,50 @@ function displayProfiles(data){
  */
 getProfiles()
     .then(displayProfiles)
-    .then(data => console.log(data));
+    .then(eventLister)
+    .then(closeModel);
 
 
 
-function eventLister(){
+
+function eventLister(data){
+    console.log(data[0]);
     const profiles = document.getElementsByClassName('profile');
-
-    console.log(profiles);
-    
     for(let i=0; i < profiles.length;i++){
         const input = profiles[i]
         input.addEventListener('click',(e) =>{
-            const target = e.target;
-            console.log(target);
-            
+            const target = e.target.parentElement.parentElement;
+            for(let i = 0; i < profiles.length; i++){
+                if(profiles[i] === target){
+                    getModel(data[i]);
+                }
+            }
         })
     }
 }
 
-function getModel(e) {
+function getModel(i) {
+    console.log(i);
     model.innerHTML += `<div id="model">
-        <img src="/imgs/user.jpg" class="model_img" alt="user1">
+        <img src="${i.picture.large}" class="model_img" alt="user1">
         <img src="/imgs/x_btn.jpg" id="x_btn" alt="close_btn">
         <div class="contact">
-            <h3>Sergio Moore</h3>
-            <p>sergio.moore@example.com</p>
-            <p class="city">8638 Hickory Creek Dr</p>
+            <h3>${i.name.first} ${i.name.last}</h3>
+            <p>${i.email}</p>
+            <p class="city">${i.location.city}, ${i.location.country}</p>
         </div>
         <div class="other">
-            <p>(098)-720-9977</p>
-            <p>7859 Central St 7859 Central St 7859 Central St</p>
-            <p>Birthday<strong>:</strong> 12/3/1968</p>
+            <p>${i.phone}</p>
+            <p>${i.location.street.number} ${i.location.street.name}</p>
+            <p>Birthday<strong>:</strong> ${i.dob.date}</p>
         </div>
     </div>`
+    console.log(model);
+    model.className = 'model-on';
 }
 
+function closeModel (){
+    x_btn.addEventListener('click',() =>{
+        model.classList.add('model-off');
+    })
+}
