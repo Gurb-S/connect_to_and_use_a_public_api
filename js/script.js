@@ -9,6 +9,7 @@ v2 - ???
 *************************************************/
 
 const directory = document.getElementById('directory');
+const model = document.getElementById('model-window');
 
 
 /**
@@ -42,17 +43,48 @@ function displayProfiles(data){
         </div>    
         </div>`;
     })
+    return data;
 }
 /**
  * calls the `getProfiles` function and returns a promise that holds an array of objects
  * Since it return a promise the .then() method can be called passing the returned 
  *  promise as data for the `displayProfiles` function 
  */
-// getProfiles()
-//     .then(displayProfiles);
+getProfiles()
+    .then(displayProfiles)
+    .then(data => console.log(data));
 
+
+
+function eventLister(){
+    const profiles = document.getElementsByClassName('profile');
+
+    console.log(profiles);
+    
+    for(let i=0; i < profiles.length;i++){
+        const input = profiles[i]
+        input.addEventListener('click',(e) =>{
+            const target = e.target;
+            console.log(target);
+            
+        })
+    }
+}
 
 function getModel(e) {
-    directory.style.backgroundColor = '#464646';
+    model.innerHTML += `<div id="model">
+        <img src="/imgs/user.jpg" class="model_img" alt="user1">
+        <img src="/imgs/x_btn.jpg" id="x_btn" alt="close_btn">
+        <div class="contact">
+            <h3>Sergio Moore</h3>
+            <p>sergio.moore@example.com</p>
+            <p class="city">8638 Hickory Creek Dr</p>
+        </div>
+        <div class="other">
+            <p>(098)-720-9977</p>
+            <p>7859 Central St 7859 Central St 7859 Central St</p>
+            <p>Birthday<strong>:</strong> 12/3/1968</p>
+        </div>
+    </div>`
 }
 
