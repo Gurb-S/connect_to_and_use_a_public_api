@@ -88,7 +88,9 @@ function eventListener(data){
  * @param {array} i - an array of objects with info about a specificed user
  */
 function getModel(i) {
-    model.innerHTML = `<div id="model">
+    model.innerHTML = `
+    <img src="/imgs/left_arrow.png" id="left_arrow" class="both_arrow" alt="left arrow">
+    <div id="model">
         <img src="${i.picture.large}" class="model_img" alt="user1">
         <img src="/imgs/x_btn.jpg" id="x_btn" alt="close_btn">
         <div class="contact">
@@ -101,7 +103,8 @@ function getModel(i) {
             <p>${i.location.street.number} ${i.location.street.name}</p>
             <p>Birthday<strong>:</strong> ${dobFormat(i.dob.date)}</p>
         </div>
-    </div>`
+    </div>
+    <img src="/imgs/right_arrow.png" id="right_arrow" class="both_arrow" alt="right arrow">`
     console.log(model);
     model.className = 'model-on';
     const x_btn = document.getElementById('x_btn');
