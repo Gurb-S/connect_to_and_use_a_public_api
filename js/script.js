@@ -166,16 +166,29 @@ function clickableBtns (){
 }
 
 
-
+/**
+ * runs the `searchResults` function anytime the enter is pressed in the search bar or if the 
+ *  search icon is clicked
+ */
 form.addEventListener('submit',(e) =>{
     e.preventDefault();
     searchResults();
 })
 
+/**
+ * runs the `searchResults` function anytime a key is press on your keyboard
+ */
 search.addEventListener('keyup',() =>{
     searchResults();
 })
 
+/**
+ *`searchResults` function takes the value of the search bar and checks if it matches any 
+ *  first or last names for the users that are on the page and if so then it stores those users in an array 
+ *  and and calls the `displayProfiles()` function on that array and displays those specfic users
+ * If the value in the search bar does not match a first or last name of any user it displays and h2 element
+ *  saying that there was no user found
+ */
 function searchResults () {
     const searchInput = search.value;
     let searchDisplays = [];
