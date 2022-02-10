@@ -25,7 +25,6 @@ async function getProfiles(){
     const response = await fetch('https://randomuser.me/api/?results=12&nat=us');
     const data = await response.json();
     const profiles = data.results;
-    console.log(profiles);
     return Promise.all(profiles);
 }
 
@@ -36,7 +35,6 @@ async function getProfiles(){
  * @returns - returns the array of objects that was passed into it as an arguement
  */
 function displayProfiles(data){
-    console.log(data);
     directory.innerHTML = '';
     data.map(person => {
         directory.innerHTML += `<div class="profile">
@@ -68,7 +66,6 @@ getProfiles()
  * @param {array} data - an array of object with info about users
  */
 function eventListener(data){
-    console.log(data);
     const profiles = document.getElementsByClassName('profile');
     for(let i=0; i < profiles.length;i++){
         const input = profiles[i]
@@ -76,7 +73,6 @@ function eventListener(data){
             const target = e.target.parentElement.parentElement;
             const imgParent = e.target.parentElement;
             const profileDiv = e.target;
-            console.log(target);
             for(let i = 0; i < profiles.length; i++){
                 if(profiles[i] === target || profiles[i] === imgParent || profiles[i] === profileDiv){
                     modelTemplate(data[i],data);
@@ -105,7 +101,6 @@ function dobFormat (string) {
  */
 
 function modelTemplate(i){
-    console.log(i);
     model.innerHTML = `
     <img src="/imgs/icons/left_arrow.png" id="left_arrow" class="both_arrow" alt="left arrow">
     <div id="model">
@@ -123,7 +118,6 @@ function modelTemplate(i){
         </div>
     </div>
     <img src="/imgs/icons/right_arrow.png" id="right_arrow" class="both_arrow" alt="right arrow">`
-    console.log(model);
     model.className = 'model-on';
     const x_btn = document.getElementById('x_btn');
     const left_arrow = document.getElementById('left_arrow');
