@@ -58,8 +58,6 @@ getProfiles()
     .then(eventListener)
     .then(data => dataArray = data);
 
-
-
 /**
  *`eventListner` function that takes in an array of objects and adds an eventlistener for every
  *  user profile displayed 
@@ -85,10 +83,6 @@ function eventListener(data){
     }
     return data;
 }
-
-
-
-
 
 /**
  * `dobFormat` function that takes in a string and converts it to the MM/DD/YYYY format
