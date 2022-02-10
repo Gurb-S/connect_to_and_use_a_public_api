@@ -10,6 +10,8 @@ v2 - ???
 
 const directory = document.getElementById('directory');
 const model = document.getElementById('model-window');
+//array that holds the data recieved from the fetchAPI
+let dataArray;
 
 /**
  * `getProfiles` function
@@ -46,7 +48,6 @@ function displayProfiles(data){
     return data;
 }
 
-let dataArray;
 /**
  * calls the `getProfiles` function and returns a promise that holds an array of objects
  * Since it return a promise the .then() method can be called passing the returned 
@@ -77,7 +78,7 @@ function eventListener(data){
             console.log(target);
             for(let i = 0; i < profiles.length; i++){
                 if(profiles[i] === target || profiles[i] === imgParent || profiles[i] === profileDiv){
-                    getModel(data[i],data);
+                    modelTemplate(data[i],data);
                 }
             }
         })
@@ -86,14 +87,8 @@ function eventListener(data){
 }
 
 
-/**
- *`getModel` function that takes an array of objects and creates a popup model
- *  window for the user that was clicked on with various infomation about that user
- * @param {array} i - an array of objects with info about a specificed user
- */
-function getModel(i) {
-    modelTemplate(i);
-}
+
+
 
 /**
  * `dobFormat` function that takes in a string and converts it to the MM/DD/YYYY format
@@ -106,6 +101,11 @@ function dobFormat (string) {
     return dobString.join('/');
 }
 
+/**
+ *`getModel` function that takes an array of objects and runs a creates a popup model
+ *  window for the user that was clicked on with various infomation about that user
+ * @param {array} i - an array of objects with info about a specificed user
+ */
 
 function modelTemplate(i){
     console.log(i);
@@ -135,6 +135,10 @@ function modelTemplate(i){
     
 }
 
+/**
+ * `clickableBtns` function adds functionality to the close btn as well as the left and right arrows
+ *  when a model window is open
+ */
 function clickableBtns (){
 
     x_btn.addEventListener('click',() =>{
