@@ -104,10 +104,10 @@ function dobFormat (string) {
 function modelTemplate(i){
     console.log(i);
     model.innerHTML = `
-    <img src="/imgs/left_arrow.png" id="left_arrow" class="both_arrow" alt="left arrow">
+    <img src="/imgs/icons/left_arrow.png" id="left_arrow" class="both_arrow" alt="left arrow">
     <div id="model">
         <img src="${i.picture.large}" class="model_img" alt="user1">
-        <img src="/imgs/x_btn.jpg" id="x_btn" alt="close_btn">
+        <img src="/imgs/icons/x_btn.jpg" id="x_btn" alt="close_btn">
         <div class="contact">
             <h3>${i.name.first} ${i.name.last}</h3>
             <p>${i.email}</p>
@@ -119,7 +119,7 @@ function modelTemplate(i){
             <p>Birthday<strong>:</strong> ${dobFormat(i.dob.date)}</p>
         </div>
     </div>
-    <img src="/imgs/right_arrow.png" id="right_arrow" class="both_arrow" alt="right arrow">`
+    <img src="/imgs/icons/right_arrow.png" id="right_arrow" class="both_arrow" alt="right arrow">`
     console.log(model);
     model.className = 'model-on';
     const x_btn = document.getElementById('x_btn');
@@ -138,7 +138,6 @@ function clickableBtns (){
     x_btn.addEventListener('click',() =>{
         model.className = 'model-off';
     })
-
     left_arrow.addEventListener('click',(e) =>{
         const arrowModel = e.target.nextElementSibling;
         const profiles = document.getElementsByClassName('profile');
