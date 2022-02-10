@@ -10,6 +10,8 @@ v2 - ???
 
 const directory = document.getElementById('directory');
 const model = document.getElementById('model-window');
+const form = document.getElementById('searchStudents');
+const search = document.getElementById('search');
 //array that holds the data recieved from the fetchAPI
 let dataArray;
 
@@ -35,6 +37,7 @@ async function getProfiles(){
  */
 function displayProfiles(data){
     console.log(data);
+    directory.innerHTML = '';
     data.map(person => {
         directory.innerHTML += `<div class="profile">
         <img src="${person.picture.medium}" class="user_img" alt="user">
@@ -160,4 +163,32 @@ function clickableBtns (){
             }
         }
     })
+}
+
+
+
+form.addEventListener('submit',(e) =>{
+    e.preventDefault();
+    searchResults();
+})
+
+search.addEventListener('keyup',() =>{
+    searchResults();
+})
+
+function searchResults () {
+    const searchInput = search.value;
+    let searchDisplays = [];
+    for(let i = 0; i < dataArray.length; i++){
+        if(dataArray[i].name.first.toLowerCase().includes(searchInput.toLowerCase()) || dataArray[i].name.last.toLowerCase().includes(searchInput.toLowerCase())){
+            searchDisplays.push(dataArray[i]);
+            console.log(searchInput);
+        }
+    }
+    if(searchDisplays.length){
+        displayProfiles(searchDisplays);
+    }
+    else{
+        directory.innerHTML = '<h2>USER NOT FOUND...</h2>'
+    }
 }
