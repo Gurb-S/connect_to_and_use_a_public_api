@@ -45,6 +45,8 @@ function displayProfiles(data){
     })
     return data;
 }
+
+let dataArray;
 /**
  * calls the `getProfiles` function and returns a promise that holds an array of objects
  * Since it return a promise the .then() method can be called passing the returned 
@@ -52,7 +54,8 @@ function displayProfiles(data){
  */
 getProfiles()
     .then(displayProfiles)
-    .then(eventListener);
+    .then(eventListener)
+    .then(data => dataArray = data);
 
 
 
@@ -68,7 +71,6 @@ function eventListener(data){
     for(let i=0; i < profiles.length;i++){
         const input = profiles[i]
         input.addEventListener('click',(e) =>{
-            //modelWindowPopUp(e,profiles,data);
             const target = e.target.parentElement.parentElement;
             const imgParent = e.target.parentElement;
             const profileDiv = e.target;
@@ -80,6 +82,7 @@ function eventListener(data){
             }
         })
     }
+    return data;
 }
 
 
@@ -88,8 +91,24 @@ function eventListener(data){
  *  window for the user that was clicked on with various infomation about that user
  * @param {array} i - an array of objects with info about a specificed user
  */
-function getModel(i,data) {
-    console.log(data);
+function getModel(i) {
+    modelTemplate(i);
+}
+
+/**
+ * `dobFormat` function that takes in a string and converts it to the MM/DD/YYYY format
+ * @param {string} string - takes in a string that holds a date of birth in a specific format
+ * @returns - a string with the dob formatted as MM/DD/YYYY
+ */
+function dobFormat (string) {
+    const bdaySplit = string.split('T')[0].split('-');
+    const dobString = [bdaySplit[1],bdaySplit[2],bdaySplit[0]];
+    return dobString.join('/');
+}
+
+
+function modelTemplate(i){
+    console.log(i);
     model.innerHTML = `
     <img src="/imgs/left_arrow.png" id="left_arrow" class="both_arrow" alt="left arrow">
     <div id="model">
@@ -109,68 +128,39 @@ function getModel(i,data) {
     <img src="/imgs/right_arrow.png" id="right_arrow" class="both_arrow" alt="right arrow">`
     console.log(model);
     model.className = 'model-on';
-    // const x_btn = document.getElementById('x_btn');
-    // x_btn.addEventListener('click',() =>{
-    //     model.className = 'model-off';
-    // })
-    // const left_arrow = document.getElementById('left_arrow');
-    // const right_arrow = document.getElementById('right_arrow');
-    // left_arrow.addEventListener('click',(e) =>{
-    //     console.log(e.target.parentElement);
-    // })
-    // right_arrow.addEventListener('click',(e) =>{
-    //     console.log(e.target.parentElement);
-    // })
-    clickableBtns(data);
+    const x_btn = document.getElementById('x_btn');
+    const left_arrow = document.getElementById('left_arrow');
+    const right_arrow = document.getElementById('right_arrow');
+    clickableBtns();
+    
 }
 
-function clickableBtns (data){
-    console.log(data);
-    const x_btn = document.getElementById('x_btn');
+function clickableBtns (){
+
     x_btn.addEventListener('click',() =>{
         model.className = 'model-off';
     })
-    const left_arrow = document.getElementById('left_arrow');
-    const right_arrow = document.getElementById('right_arrow');
+
     left_arrow.addEventListener('click',(e) =>{
-        // const target = e.target.parentElement.previousElementSibling.children;
-        // console.log(target);
         const arrowModel = e.target.nextElementSibling;
-        // console.log(arrowModel);
         const profiles = document.getElementsByClassName('profile');
         for(let i = 0; i < profiles.length; i++){
             const profileName = profiles[i].children[1].children[0].textContent;
-            // console.log(profileName);
-            if(profileName === arrowModel.children[2].children[0].textContent){
-                console.log(profileName);
-                console.log(data[i-1]);
+            const arrowBtns = arrowModel.children[2].children[0].textContent;
+            if(profileName === arrowBtns){
+                modelTemplate(dataArray[i-1]);
             }
         }
     })
     right_arrow.addEventListener('click',(e) =>{
-        console.log(e.target.parentElement.previousElementSibling.children);
+        const arrowModel = e.target.previousElementSibling;
+        const profiles = document.getElementsByClassName('profile');
+        for(let i = 0; i < profiles.length; i++){
+            const profileName = profiles[i].children[1].children[0].textContent;
+            const arrowBtns = arrowModel.children[2].children[0].textContent;
+            if(profileName === arrowBtns){
+                modelTemplate(dataArray[i+1]);
+            }
+        }
     })
 }
-
-/**
- * `dobFormat` function that takes in a string and converts it to the MM/DD/YYYY format
- * @param {string} string - takes in a string that holds a date of birth in a specific format
- * @returns - a string with the dob formatted as MM/DD/YYYY
- */
-function dobFormat (string) {
-    const bdaySplit = string.split('T')[0].split('-');
-    const dobString = [bdaySplit[1],bdaySplit[2],bdaySplit[0]];
-    return dobString.join('/');
-}
-
-// function modelWindowPopUp (e,profiles,data){
-//     const target = e.target.parentElement.parentElement;
-//     const imgParent = e.target.parentElement;
-//     const profileDiv = e.target;
-//     console.log(target);
-//     for(let i = 0; i < profiles.length; i++){
-//         if(profiles[i] === target || profiles[i] === imgParent || profiles[i] === profileDiv){
-//             getModel(data[i]);
-//         }
-//     }
-// }
