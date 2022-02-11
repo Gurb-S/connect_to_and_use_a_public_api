@@ -101,6 +101,7 @@ function dobFormat (string) {
  */
 
 function modelTemplate(i){
+    console.log(i);
     model.innerHTML = `
     <img src="/imgs/icons/left_arrow.png" id="left_arrow" class="both_arrow" alt="left arrow">
     <div id="model">
@@ -113,7 +114,7 @@ function modelTemplate(i){
         </div>
         <div class="other">
             <p>${i.phone}</p>
-            <p>${i.location.street.number} ${i.location.street.name}</p>
+            <p>${i.location.street.number} ${i.location.street.name}, ${i.location.city}, ${i.location.state}, ${i.location.postcode}</p>
             <p>Birthday<strong>:</strong> ${dobFormat(i.dob.date)}</p>
         </div>
     </div>
