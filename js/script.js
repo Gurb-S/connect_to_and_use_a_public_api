@@ -195,6 +195,7 @@ function searchResults () {
     }
     if(searchDisplays.length){
         displayProfiles(searchDisplays);
+        eventListener(searchDisplays);
     }
     else{
         directory.innerHTML = '<h2>USER NOT FOUND...</h2>'
